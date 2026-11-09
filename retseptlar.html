@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dasturxon — ovqatlar retseptlari</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f8f8;--card:#ffffff;--ink:#14213d;--muted:#51607a;--blue:#1d3f9e;--teal:#0f8f8a;--gold:#f0b429;--line:#d5e0e3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1629;--card:#16223d;--ink:#eaf0fb;--muted:#9fb0cf;--blue:#8fb0ff;--teal:#3cc7bf;--gold:#f0b429;--line:#2a3a5e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1629;--card:#16223d;--ink:#eaf0fb;--muted:#9fb0cf;--blue:#8fb0ff;--teal:#3cc7bf;--gold:#f0b429;--line:#2a3a5e;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{padding:44px 0 22px}
+h1{font-size:clamp(2.4rem,9vw,4.4rem);line-height:1;margin:0 0 12px;font-weight:800;letter-spacing:-.03em;color:var(--blue)}
+header p{max-width:46ch;color:var(--muted);margin:0;font-size:1.1rem}
+.band{height:10px;background:repeating-linear-gradient(90deg,var(--blue) 0 28px,var(--teal) 28px 56px,var(--gold) 56px 84px)}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 8px}
+input[type=search]{flex:1 1 220px;padding:12px 14px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+input[type=search]:focus,button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 22px}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:99px;font:inherit;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+:root[data-theme="dark"] .chip[aria-pressed=true]{color:#0e1629}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed=true]{color:#0e1629}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;padding-bottom:40px}
+.r{background:var(--card);border:2px solid var(--line);border-radius:14px;overflow:hidden;align-self:start}
+.r .top{padding:16px 16px 6px}
+.emoji{font-size:2.4rem}
+.r h2{margin:4px 0 4px;font-size:1.35rem}
+.meta{color:var(--muted);font-size:.92rem}
+summary{cursor:pointer;padding:12px 16px;font-weight:600;color:var(--teal);list-style:none;border-top:2px solid var(--line)}
+summary::-webkit-details-marker{display:none}
+details[open] summary{color:var(--blue)}
+.body{padding:2px 16px 18px}
+.body h3{font-size:1rem;margin:12px 0 4px}
+.body ul,.body ol{margin:0;padding-left:20px}
+.body li{margin:3px 0}
+.empty{grid-column:1/-1;color:var(--muted);padding:30px 0}
+footer{border-top:2px solid var(--line);padding:20px 0 30px;color:var(--muted);font-size:.92rem}
+</style>
+</head>
+<body>
+<div class="band"></div>
+<header><div class="wrap">
+<h1>Dasturxon</h1>
+<p>Oddiy, tushunarli va ishonchli retseptlar. Ovqatni tanlang, masalliqlarni tayyorlang, qadamma-qadam pishiring.</p>
+</div></header>
+<main class="wrap">
+<div class="tools"><input id="q" type="search" placeholder="Ovqat nomini qidiring…" aria-label="Ovqat nomini qidiring"></div>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div>
+</main>
+<footer><div class="wrap">Yoqimli ishtaha! Miqdorlar taxminan 4 kishilik porsiya uchun berilgan.</div></footer>
+<script>
+var R=[
+{n:"Osh (palov)",c:"Asosiy taom",e:"🍚",t:"2 soat",p:"6 kishi",
+i:["1 kg guruch","1 kg sabzi","800 g goʻsht","300 ml oʻsimlik moyi","2 ta piyoz","1 bosh sarimsoq","Zira, tuz"],
+s:["Qozonda moyni qizdirib, piyozni qizartiring.","Goʻshtni qoʻshib, 10 daqiqa qovuring.","Sabzini choʻp shaklida kesib soling, 15 daqiqa qovuring.","Suv quyib, zirvak qaynating, tuz va zira soling.","Yuvilgan guruchni tekis yoyib, ustiga issiq suv quying.","Suv singgach, sarimsoqni oʻrtaga qoʻyib, 25 daqiqa dimlang."]},
+{n:"Lagʻmon",c:"Asosiy taom",e:"🍜",t:"1,5 soat",p:"4 kishi",
+i:["400 g lagʻmon xamiri","400 g goʻsht","2 ta sabzi","2 ta bulgʻor qalampiri","1 ta piyoz","3 dona kartoshka","Pomidor pastasi, tuz"],
+s:["Goʻshtni kubik qilib moyda qovuring.","Piyoz, sabzi va qalampirni qoʻshing.","Pomidor pastasi va kartoshkani solib, suv quying.","Yarim soat past olovda pishiring.","Xamirni qaynoq suvda pishirib, laganda soling.","Ustidan qaynoq qaylani quying."]},
+{n:"Somsa",c:"Xamir ovqat",e:"🥟",t:"1 soat 30 daq",p:"8 dona",
+i:["500 g un","300 g goʻsht","3 ta piyoz","100 g dumba yogʻi","1 tuxum","Tuz, zira, qora murch"],
+s:["Un, suv va tuzdan xamir qorib, dam bering.","Goʻshtni mayda toʻgʻrab, piyoz va dumba bilan aralashtiring.","Xamirni yupqa yoyib, kvadrat qilib kesing.","Ichiga masalliqdan solib, uchburchak shaklida yoping.","Ustiga tuxum surting.","200 °C da 35 daqiqa pishiring."]},
+{n:"Manti",c:"Xamir ovqat",e:"🥘",t:"1 soat 20 daq",p:"4 kishi",
+i:["500 g un","500 g goʻsht","4 ta piyoz","100 g qovoq","Tuz, qora murch","Qaymoq yoki suzma"],
+s:["Tuz va suvli xamir qorib, 30 daqiqa dam bering.","Goʻsht, piyoz va qovoqni kubik qilib aralashtiring.","Xamirni kvadrat qilib kesing.","Ichiga masalliq solib, burchaklarini tugib yoping.","Moylangan kaskonga terib, bugʻda 45 daqiqa pishiring."]},
+{n:"Mastava",c:"Sho‘rva",e:"🍲",t:"1 soat",p:"4 kishi",
+i:["200 g goʻsht","100 g guruch","2 ta kartoshka","1 ta sabzi","1 ta piyoz","2 ta pomidor","Tuz, koʻkat"],
+s:["Goʻsht va piyozni qovuring.","Sabzi va pomidorni qoʻshib, bir oz dimlang.","Suv quying, qaynaganda kartoshkani soling.","Guruchni qoʻshib, 25 daqiqa pishiring.","Koʻkat sepib, qatiq bilan torting."]},
+{n:"Chuchvara",c:"Sho‘rva",e:"🍥",t:"1 soat",p:"4 kishi",
+i:["400 g un","300 g goʻsht","2 ta piyoz","1 tuxum","Tuz, murch","Shivit yoki petrushka"],
+s:["Un, tuxum, suv va tuzdan qattiq xamir qoring.","Xamirni yupqa yoyib, kichik kvadratlarga kesing.","Mayda toʻgʻralgan goʻsht va piyozni ichiga soling.","Burchaklarini ulab, quloqchaga oʻxshatib yoping.","Qaynoq sho‘rvada 10 daqiqa pishiring."]},
+{n:"Qaymoqli blinchik",c:"Shirinlik",e:"🥞",t:"30 daqiqa",p:"4 kishi",
+i:["2 stakan un","2 stakan sut","2 ta tuxum","2 osh qoshiq shakar","1 osh qoshiq moy","Bir chimdim tuz"],
+s:["Tuxum, shakar va tuzni aralashtiring.","Sut va unni qoʻshib, bir tekis xamir qoring.","Moy qoʻshing, 10 daqiqa dam bering.","Qizigan tovada ikki tomonini 1 daqiqadan pishiring.","Qaymoq yoki asal bilan torting."]},
+{n:"Qatlama",c:"Shirinlik",e:"🥐",t:"1 soat 15 daq",p:"6 dona",
+i:["500 g un","200 g saryogʻ","1 stakan iliq suv","1 tuxum","1 choy qoshiq tuz","Shakar yoki asal"],
+s:["Un, tuxum, suv va tuzdan yumshoq xamir qorib, 30 daqiqa dam bering.","Xamirni yupqa yoyib, erigan saryogʻ suring.","Rulet qilib oʻrab, boʻlaklarga boʻling.","Har boʻlakni yassilab yoying.","Tovada ikki tomonini tilla rang boʻlguncha pishiring."]}
+];
+var cat="Hammasi",q="",grid=document.getElementById("grid"),chips=document.getElementById("chips");
+function cats(){var s=["Hammasi"];R.forEach(function(r){if(s.indexOf(r.c)<0)s.push(r.c)});return s}
+function drawChips(){chips.innerHTML="";cats().forEach(function(c){var b=document.createElement("button");b.className="chip";b.textContent=c;b.setAttribute("aria-pressed",c===cat);b.onclick=function(){cat=c;drawChips();draw()};chips.appendChild(b)})}
+function esc(s){return s.replace(/[&<>]/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[m]})}
+function draw(){var l=R.filter(function(r){return(cat==="Hammasi"||r.c===cat)&&r.n.toLowerCase().indexOf(q)>=0});
+if(!l.length){grid.innerHTML="<p class=\"empty\">Hech narsa topilmadi. Boshqa nom yozing yoki toifani almashtiring.</p>";return}
+grid.innerHTML=l.map(function(r){return "<article class=\"r\"><div class=\"top\"><div class=\"emoji\">"+r.e+"</div><h2>"+esc(r.n)+"</h2><div class=\"meta\">"+r.c+" · "+r.t+" · "+r.p+"</div></div><details><summary>Retseptni ochish</summary><div class=\"body\"><h3>Masalliqlar</h3><ul>"+r.i.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+"</ul><h3>Tayyorlash</h3><ol>"+r.s.map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+"</ol></div></details></article>"}).join("")}
+document.getElementById("q").addEventListener("input",function(e){q=e.target.value.trim().toLowerCase();draw()});
+drawChips();draw();
+</script>
+</body>
+</html>
